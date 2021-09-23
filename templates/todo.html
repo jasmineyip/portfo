@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+            <div class="ui large secondary inverted pointing menu">
+                <a href="/works" class="item">Back to Portfolio</a>
+            </div>
+            <h1 class="ui inverted center aligned icon header">
+                <i class="check circle outline icon"></i>
+                <div class="content">
+                    To-Do List
+                </div>
+            </h1>
+        </div>
+    </div>
+    
+    <div style="margin-top: 50px; padding-bottom: 100px; " class="ui container">
+
+        <form class="ui form" action="/add" method="POST">
+            <div class="field">
+                <label for="title">Todo Title</label>
+                <input type="text" name="title" placeholder="Enter Todo...">
+            </div>
+            <div class="field">
+                <button class="ui blue button" type="submit">Add</button>
+            </div>
+
+        </form>
+
+        {% for todo in todo_list %}
+        <div class="ui segment">
+            <p class="ui large header"> {{ todo.title }} </p>
+            {% if todo.complete == False %}
+                <span class="ui gray ribbon label">Not Completed</span>
+            {% else %}
+                <span class="ui green ribbon label">Completed</span>
+            {% endif %}
+            <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+            <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
